@@ -5,15 +5,23 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_start</sprite>
+    <sprite>sprites\spr_start_hover</sprite>
+    <sprite>sprites\spr_input</sprite>
+    <sprite>sprites\spr_input_hover</sprite>
+    <sprite>sprites\spr_input_active</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_received_packet.gml</script>
+    <script>scripts\scr_update_players.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_server</object>
     <object>objects\obj_click</object>
+    <object>objects\Ip</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_room</room>

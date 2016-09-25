@@ -29,7 +29,6 @@
 var type = network_socket_tcp;
 var ip = "110.20.182.238";
 var port = 51268;
-latency = 0;
 socket = network_create_socket(type);
 connection = network_connect(socket, ip, port);
 
@@ -37,6 +36,9 @@ var size = 1024;
 var type = buffer_fixed;
 var alignment = 1;
 buffer = buffer_create(size, type, alignment);
+
+latency = 0;
+playersConnected = 1;
 </string>
           </argument>
         </arguments>
@@ -124,7 +126,7 @@ switch(type_event)
         var buffer = async_load[? "buffer"];
         buffer_seek(buffer, buffer_seek_start, 0);
         scr_received_packet(buffer);
-        break;
+    break;
 }
 </string>
           </argument>
@@ -173,7 +175,8 @@ buffer_delete(buffer);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text( 5, 5, "Latency: "+ string( latency ) ); 
+            <string>draw_text( 5, 5, "Latency: "+ string( latency)); 
+draw_text( 5, 15, "Current Players: "+ string(playersConnected));
 </string>
           </argument>
         </arguments>

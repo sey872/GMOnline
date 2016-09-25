@@ -8,9 +8,12 @@ switch(message_id)
         var mx = buffer_read(buffer, buffer_u32);
         var my = buffer_read(buffer, buffer_u32);
         instance_create(mx, my, obj_click);
-        break;
-        
+    break;
+    case 98: // player update
+        playersConnected = buffer_read(buffer, buffer_u32); 
+    break;
     case 99: //get ping
         var time = buffer_read(buffer, buffer_u32);
         latency = current_time - time;
+    break;
 }
