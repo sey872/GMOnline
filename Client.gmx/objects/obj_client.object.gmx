@@ -28,8 +28,8 @@
             <string>// create the client
 var type = network_socket_tcp;
 var ip = "110.20.182.238";
-//var ip = "192.168.0.17";
 var port = 51268;
+latency = 0;
 socket = network_create_socket(type);
 connection = network_connect(socket, ip, port);
 
@@ -37,6 +37,33 @@ var size = 1024;
 var type = buffer_fixed;
 var alignment = 1;
 buffer = buffer_create(size, type, alignment);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// create and send click values
+buffer_seek(buffer, buffer_seek_start, 0);
+buffer_write(buffer, buffer_u8, 99);        // 99
+buffer_write(buffer, buffer_u32, current_time);  // 99, current_time
+network_send_packet(socket, buffer, buffer_tell(buffer));
 </string>
           </argument>
         </arguments>
@@ -124,6 +151,29 @@ switch(type_event)
             <string>// destroy socket
 network_destroy(socket);
 buffer_delete(buffer);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text( 5, 5, "Latency: "+ string( latency ) ); 
 </string>
           </argument>
         </arguments>

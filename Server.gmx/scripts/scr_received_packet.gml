@@ -2,6 +2,11 @@
 var buffer = argument[0];
 var socket = argument[1];
 var message_id = buffer_read(buffer, buffer_u8);
+//reply
+var size = 1024;
+var type = buffer_fixed;
+var alignment = 1;
+bufferReply = buffer_create(size, type, alignment);
 
 switch(message_id)    //mouse click event
 {
@@ -10,10 +15,6 @@ switch(message_id)    //mouse click event
         var my = buffer_read(buffer, buffer_u32);
         instance_create(mx, my, obj_click);
         // Send dot to all other clients
-        var size = 1024;
-        var type = buffer_fixed;
-        var alignment = 1;
-        bufferReply = buffer_create(size, type, alignment);
         buffer_seek(bufferReply, buffer_seek_start, 0);
         buffer_write(bufferReply, buffer_u8, 1);         // 1
         buffer_write(bufferReply, buffer_u32, mx);  // 1, xpos
@@ -28,5 +29,12 @@ switch(message_id)    //mouse click event
                 network_send_packet(testSocket, bufferReply, buffer_tell(bufferReply));
             }
         }
+    break;
+    case 99:
+        var time = buffer_read(buffer, buffer_u32);
+        buffer_seek(bufferReply, buffer_seek_start, 0);
+        buffer_write(bufferReply, buffer_u8, 99);
+        buffer_write(bufferReply, buffer_u32, time);
+        network_send_packet(socket, bufferReply, buffer_tell(bufferReply));
     break;
 }
